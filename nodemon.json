@@ -1,0 +1,8 @@
+{
+    "watch": ["src", "views"],
+    "ext": "js,nunjucks",
+    "exec": "npm start",
+    "events": {
+        "restart": "terminal-notifier -title 'goins.io' -subtitle 'nodemon' -message 'goins.io server was restarted.' -exec '/Applications/iTerm.app' -appIcon nodemon-icon.png"
+    }
+}

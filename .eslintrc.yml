@@ -1,0 +1,97 @@
+env:
+    es6: true
+    node: true
+extends: 'eslint:recommended'
+parser: babel-eslint
+parserOptions:
+    sourceType: module
+    ecmaVersion: 6
+rules:
+    indent:
+        - warn
+        - 4
+    linebreak-style:
+        - error
+        - unix
+    quotes:
+        - warn
+        - single
+    semi:
+        - warn
+        - always
+    no-console: off
+    no-debugger: off
+    no-empty:
+        - warn
+    no-extra-parens:
+        - warn
+        - all
+        - nestedBinaryExpressions: false
+    block-scoped-var: error
+    class-methods-use-this: warn
+    consistent-return: error
+    dot-location:
+        - error
+        - property
+    dot-notation:
+        - warn
+    no-caller: error
+    no-empty-function: warn
+    no-eq-null: warn
+    no-extra-bind: warn
+    no-extra-label: warn
+    no-floating-decimal: warn
+    no-global-assign: error
+    no-implicit-coercion: error
+    no-invalid-this: error
+    no-lone-blocks: warn
+    no-magic-numbers: warn
+    no-multi-spaces: warn
+    no-new-func: error
+    no-new-wrappers: warn
+    no-param-reassign: error
+    no-redeclare: error
+    no-return-assign:
+        - error
+        - always
+    no-self-assign:
+        - error
+        - props: true
+    no-self-compare: error
+    no-throw-literal: error
+    no-unused-expressions: warn
+    no-unused-labels: warn
+    no-useless-concat: warn
+    no-useless-escape: warn
+    no-useless-return: warn
+    no-void: error
+    no-label-var: error
+    no-shadow-restricted-names: error
+    no-shadow: warn
+    no-undef-init: error
+    no-catch-shadow: warn
+    no-delete-var: error
+    no-undef: error
+    no-unused-vars: warn
+    global-require: error
+    no-path-concat: warn
+    arrow-body-style:
+        - warn
+        - as-needed
+    arrow-spacing:
+        - warn
+        - before: true
+          after: true
+    constructor-super: error
+    no-class-assign: error
+    no-duplicate-imports: error
+    no-useless-computed-key: error
+    no-useless-constructor: warn
+    no-useless-rename: warn
+    object-shorthand: warn
+    prefer-arrow-callback: warn
+    prefer-const: warn
+    prefer-numeric-literals: warn
+    prefer-rest-params: error
+    prefer-spread: warn
+    prefer-template: warn

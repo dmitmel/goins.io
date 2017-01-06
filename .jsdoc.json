@@ -1,0 +1,21 @@
+{
+    "opts": {
+        "access": "all",
+        "destination": "jsdoc",
+        "package": "package.json",
+        "recurse": true,
+        "readme": "README.md",
+        "tutorials": "tutorials",
+        "template": "node_modules/ink-docstrap/template"
+    },
+    "plugins": ["plugins/markdown"],
+    "templates": {
+        "systemName": "goins.io",
+        "copyright": "Copyright (c) Dmitriy Meleshko 2017",
+        "theme": "lumen",
+        "linenums": true,
+        "inverseNav": true,
+        "outputSourceFiles": true,
+        "syntaxTheme": "dark"
+    }
+}

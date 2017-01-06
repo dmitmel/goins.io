@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: object-schema - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-lib_object-schema.html">lib/object-schema</a><ul class='methods'><li data-type='method'><a href="module-lib_object-schema.html#.and">and</a></li><li data-type='method'><a href="module-lib_object-schema.html#.Array">Array</a></li><li data-type='method'><a href="module-lib_object-schema.html#.checkValue">checkValue</a></li><li data-type='method'><a href="module-lib_object-schema.html#.conditional">conditional</a></li><li data-type='method'><a href="module-lib_object-schema.html#.Enum">Enum</a></li><li data-type='method'><a href="module-lib_object-schema.html#.max">max</a></li><li data-type='method'><a href="module-lib_object-schema.html#.maxLength">maxLength</a></li><li data-type='method'><a href="module-lib_object-schema.html#.min">min</a></li><li data-type='method'><a href="module-lib_object-schema.html#.minLength">minLength</a></li><li data-type='method'><a href="module-lib_object-schema.html#.NotEmptyArray">NotEmptyArray</a></li><li data-type='method'><a href="module-lib_object-schema.html#.Object">Object</a></li><li data-type='method'><a href="module-lib_object-schema.html#.optional">optional</a></li><li data-type='method'><a href="module-lib_object-schema.html#.regexp">regexp</a></li><li data-type='method'><a href="module-lib_object-schema.html#.required">required</a></li><li data-type='method'><a href="module-lib_object-schema.html#.validate">validate</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-object-schema.html">object-schema</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getLocalIP">getLocalIP</a></li><li><a href="global.html#hasUserCookie">hasUserCookie</a></li><li><a href="global.html#minifyHTML">minifyHTML</a></li><li><a href="global.html#readdirRecursiveSync">readdirRecursiveSync</a></li><li><a href="global.html#renderNunjucks">renderNunjucks</a></li><li><a href="global.html#statusCodes">statusCodes</a></li><li><a href="global.html#statusDescriptions">statusDescriptions</a></li><li><a href="global.html#throwWithMessage">throwWithMessage</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Tutorial: object-schema</h1>
+    
+
+    <section>
+
+<header>
+    
+
+    <h2>object-schema</h2>
+</header>
+
+<article>
+    <h1>lib/object-schema.js Tutorial</h1><p>This module is lightweight object type validator. It's very useful in JSON/REST Web APIs
+to validate requests with JSON data.</p>
+<h2>Example</h2><pre class="prettyprint source lang-javascript"><code>import schema from 'lib/object-schema';    // Or ./lib/object-schema in project context
+
+const userSchema = {
+    users: schema.required(schema.Array(
+        schema.Object({
+            name: schema.required(schema.minLength(3, schema.maxLength(30, schema.AlphanumString))),
+            password: schema.required(rschema.egexp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/)),
+            email: schema.required(schema.Email),
+            status: schema.optional(schema.NotEmptyString),
+            id: schema.required(schema.AlphanumString),
+            friends: schema.optional(schema.Array(schema.AlphanumString))
+        })
+    ))
+}
+
+var result = schema.validate(..., userSchema);</code></pre><p>Function <code>schema.validate</code> is described in <a href="./module-lib_object-schema.html">documentation</a>.</p>
+<h2>Schema Structure</h2><p>Schema is an object, where keys are property names, and values are type predicates. Type
+predicate is a function that takes object and property name (<code>(object, prop) =&gt; ...</code>),
+checks it, and returns array of errors. You can use function <code>checkValue</code>
+(<code>checkValue((value, prop) =&gt; ...)</code>) to create type predicates easier.</p>
+<table class="table table-striped">
+    <caption>List of built-in type predicates</caption>
+    <thead>
+        <tr>
+            <th>Type name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>AlphanumString</code></td>
+            <td>Alpha-numeric string</td>
+        </tr>
+        <tr>
+            <td><code>Any</code></td>
+            <td>Any type</td>
+        </tr>
+        <tr>
+            <td><code>Array(...)</code></td>
+            <td>Checks each value in array using predicate</td>
+        </tr>
+        <tr>
+            <td><code>Boolean</code></td>
+            <td>Boolean</td>
+        </tr>
+        <tr>
+            <td><code>Email</code></td>
+            <td>Email</td>
+        </tr>
+        <tr>
+            <td><code>Enum(a, b, c)</code></td>
+            <td>Enum</td>
+        </tr>
+        <tr>
+            <td><code>Function</code></td>
+            <td>Function</td>
+        </tr>
+        <tr>
+            <td><code>IntegerString</code></td>
+            <td>String with integer literal</td>
+        </tr>
+        <tr>
+            <td><code>NotEmptyArray(...)</code></td>
+            <td>Like <code>Array(...)</code>, but not empty</td>
+        </tr>
+        <tr>
+            <td><code>NotEmptyString</code></td>
+            <td>Like <code>String</code>, but not empty</td>
+        </tr>
+        <tr>
+            <td><code>Number</code></td>
+            <td>Number</td>
+        </tr>
+        <tr>
+            <td><code>NumberString</code></td>
+            <td>String with integer or float literal</td>
+        </tr>
+        <tr>
+            <td><code>Object({...})</code></td>
+            <td>Takes schema and validates property</td>
+        </tr>
+        <tr>
+            <td><code>String</code></td>
+            <td>String</td>
+        </tr>
+        <tr>
+            <td><code>regexp(/abc/)</code></td>
+            <td>Checks if string matches regexp</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Also, there're some type decorators. Type decorators are functions, that take type predicate
+(and, maybe, some arguments) and return new type predicate with new effect.</p>
+<table class="table table-striped">
+    <caption>List of built-in type decorators</caption>
+    <thead>
+        <tr>
+            <th>Type decorators</th>
+            <th>Arguments</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>and</code></td>
+            <td>types (rest parameters, not array)</td>
+            <td>If first type check succeeded - check second type, otherwise - return errors. Then continue this operation with 2nd, 3rd, 4th type, and so on.</td>
+        </tr>
+        <tr>
+            <td><code>conditional</code></td>
+            <td>condition (function or boolean), error message (function or string) and type</td>
+            <td>if property isn’t <code>undefined</code> or <code>null</code> and condition is <code>true</code> - check type, otherwise (if property isn’t <code>undefined</code> or <code>null</code>) - throw error.</td>
+        </tr>
+        <tr>
+            <td><code>max</code></td>
+            <td>max value and type</td>
+            <td>If value is greater than max value - throw error, otherwise - check type.</td>
+        </tr>
+        <tr>
+            <td><code>maxLength</code></td>
+            <td>max length and type</td>
+            <td>If length of value is greater than max value - throw error, otherwise - check type.</td>
+        </tr>
+        <tr>
+            <td><code>min</code></td>
+            <td>min value and type</td>
+            <td>If value is less than min value - throw error, otherwise - check type.</td>
+        </tr>
+        <tr>
+            <td><code>minLength</code></td>
+            <td>min length and type</td>
+            <td>If length of value is less than min value - throw error, otherwise - check type.</td>
+        </tr>
+        <tr>
+            <td><code>optional</code></td>
+            <td>type</td>
+            <td>if property is <code>undefined</code> or <code>null</code> - don’t do anything, otherwise - check type.</td>
+        </tr>
+        <tr>
+            <td><code>required</code></td>
+            <td>type</td>
+            <td>if property is <code>undefined</code> or <code>null</code> - return error, otherwise - check type.</td>
+        </tr>
+    </tbody>
+</table>
+</article>
+
+</section>
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Jan 06 2017 10:46:24 GMT+0200 (EET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

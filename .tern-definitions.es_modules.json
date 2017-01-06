@@ -1,0 +1,187 @@
+{
+  "!name": "goins.io",
+  "!define": {
+    "!modules": {
+      "app/lib/objects-chema`js": {
+        "ValidationError": {
+          "prototype": {
+            "toString": {
+              "!type": "fn() -> string",
+              "!span": "298[15:4]-306[15:12]"
+            },
+            "!span": "137[8:7]-400[18:1]"
+          },
+          "!type": "fn(path: [?], value: ?, message: string)",
+          "!span": "143[8:13]-158[8:28]",
+          "path": {
+            "!type": "[?]",
+            "!span": "214[10:13]-218[10:17]"
+          },
+          "message": {
+            "!type": "string",
+            "!span": "268[12:13]-275[12:20]"
+          }
+        },
+        "and": {
+          "!type": "fn(...predicates: fn(object: ?, prop: ?)) -> fn(object: ?, prop: ?)",
+          "!span": "1325[48:16]-1328[48:19]"
+        },
+        "required": {
+          "!type": "fn(predicate: ?) -> fn(object: ?, prop: ?) -> [+!modules.app/lib/objects-chema`js.ValidationError]",
+          "!span": "1760[63:16]-1768[63:24]",
+          "!doc": "Returns type predicate, that:\n1. If property is `undefined`/`null` - returns error.\n2. otherwise - calls predicate.\n@param  {TypePredicate} predicate\n@return {TypePredicate}\n@see TypePredicate\n@see optional\n@see conditional"
+        },
+        "optional": {
+          "!type": "fn(predicate: ?) -> fn(object: ?, prop: ?) -> [?]",
+          "!span": "2375[82:16]-2383[82:24]",
+          "!doc": "Returns type predicate, that:\n1. If property is `undefined`/`null` - returns no errors.\n2. otherwise - calls predicate.\n@param  {TypePredicate} predicate\n@return {TypePredicate}\n@see TypePredicate\n@see required\n@see conditional"
+        },
+        "conditional": {
+          "!type": "fn(condition: bool, errorMessage: string, predicate: ?) -> fn(object: ?, prop: ?) -> [string]",
+          "!span": "2935[100:16]-2946[100:27]",
+          "!doc": "Returns type predicate, that:\n1. If property is `undefined`/`null` - return no errors.\n2. if condition is `true` - calls predicate.\n3. if condition is `false` - returns error with error message.\n@param  {bool}          condition\n@param  {string}        errorMessage\n@param  {TypePredicate} predicate\n@return {TypePredicate}\n@see TypePredicate\n@see required\n@see optional"
+        },
+        "checkValue": {
+          "!type": "fn(predicate: fn(value: ?, prop: ?) -> [+!modules.app/lib/objects-chema`js.ValidationError]|fn(value: ?, prop: ?) -> +!modules.app/lib/objects-chema`js.ValidationError) -> fn(object: ?, prop: ?) -> [?]|+!modules.app/lib/objects-chema`js.ValidationError",
+          "!span": "3479[116:16]-3489[116:26]",
+          "!doc": "Transforms value predicate into type predicate.\n@param  {ValuePredicate} predicate\n@return {TypePredicate}\n@see TypePredicate\n@see ValuePredicate"
+        },
+        "Any": {
+          "!type": "fn(object: ?, prop: ?) -> [?]",
+          "!span": "3852[131:13]-3855[131:16]"
+        },
+        "String": {
+          "!type": "fn(object: ?, prop: ?) -> [?]|+!modules.app/lib/objects-chema`js.ValidationError",
+          "!span": "4113[143:13]-4119[143:19]"
+        },
+        "NotEmptyString": {
+          "!type": "fn(object: ?, prop: ?)",
+          "!span": "4344[151:13]-4358[151:27]"
+        },
+        "Email": {
+          "!type": "fn(object: ?, prop: ?)",
+          "!span": "4792[162:13]-4797[162:18]"
+        },
+        "IntegerString": {
+          "!type": "fn(object: ?, prop: ?)",
+          "!span": "5354[178:13]-5367[178:26]"
+        },
+        "NumberString": {
+          "!type": "fn(object: ?, prop: ?)",
+          "!span": "5770[189:13]-5782[189:25]"
+        },
+        "Enum": {
+          "!type": "fn(...values: ?) -> fn(object: ?, prop: ?) -> [?]|+!modules.app/lib/objects-chema`js.ValidationError",
+          "!span": "6073[198:16]-6077[198:20]",
+          "!doc": "Type predicate for enums.\n@param  {...*}          values\n@return {TypePredicate}\n@see TypePredicate"
+        },
+        "regexp": {
+          "!type": "fn(_regexp: string|?) -> fn(object: ?, prop: ?)",
+          "!span": "6446[211:16]-6452[211:22]",
+          "!doc": "Returns type predicate, that checks if string matches regexp.\n@param  {string|Regexp} _regexp\n@return {TypePredicate}\n@see TypePredicate\n@see String"
+        },
+        "AlphanumString": {
+          "!type": "fn(object: ?, prop: ?)",
+          "!span": "6826[223:13]-6840[223:27]"
+        },
+        "Object": {
+          "!type": "fn(schema: !modules.app/lib/objects-chema`js.Object.!0) -> fn(object: ?, prop: ?) -> [?]|+!modules.app/lib/objects-chema`js.ValidationError",
+          "!span": "7563[246:16]-7569[246:22]",
+          "!doc": "Type predicate for objects.\n@param  {Object.<string, TypePredicate>} schema\n@return {TypePredicate}\n@see TypePredicate"
+        },
+        "Array": {
+          "!type": "fn(predicate: ?) -> fn(object: ?, prop: ?) -> [?]|+!modules.app/lib/objects-chema`js.ValidationError",
+          "!span": "8388[275:16]-8393[275:21]",
+          "!doc": "Type predicate for arrays.\n@param  {TypePredicate} predicate type predicate for all elements in array.\n@return {TypePredicate}\n@see TypePredicate\n@see NotEmptyArray\n@see minLength\n@see maxLength"
+        },
+        "NotEmptyArray": {
+          "!type": "fn(predicate: ?) -> fn(object: ?, prop: ?)",
+          "!span": "8979[293:16]-8992[293:29]",
+          "!doc": "Type predicate for not empty arrays.\n@param  {TypePredicate} predicate type predicate for all elements in array.\n@return {TypePredicate}\n@see TypePredicate\n@see Array\n@see minLength\n@see maxLength"
+        },
+        "min": {
+          "!type": "fn(minValue: ?, predicate: ?) -> fn(object: ?, prop: ?)",
+          "!span": "9506[310:16]-9509[310:19]",
+          "!doc": "Type decorator that adds min value to type predicate.\n@param  {*}             minValue\n@param  {TypePredicate} predicate\n@return {TypePredicate}"
+        },
+        "max": {
+          "!type": "fn(maxValue: ?, predicate: ?) -> fn(object: ?, prop: ?)",
+          "!span": "9883[321:16]-9886[321:19]",
+          "!doc": "Type decorator that adds max value to type predicate.\n@param  {*}             maxValue\n@param  {TypePredicate} predicate\n@return {TypePredicate}"
+        },
+        "minLength": {
+          "!type": "fn(minLen: ?, predicate: ?) -> fn(object: ?, prop: ?)",
+          "!span": "10267[333:16]-10276[333:25]",
+          "!doc": "Type decorator that adds max length to type predicate.\n@param  {*}             maxLen\n@param  {TypePredicate} predicate\n@return {TypePredicate}"
+        },
+        "maxLength": {
+          "!type": "fn(maxLen: ?, predicate: ?) -> fn(object: ?, prop: ?)",
+          "!span": "10669[345:16]-10678[345:25]",
+          "!doc": "Type decorator that adds min length to type predicate.\n@param  {*}             minLen\n@param  {TypePredicate} predicate\n@return {TypePredicate}"
+        },
+        "validate": {
+          "!type": "fn(object: ?, schema: ?) -> ?",
+          "!span": "11195[360:16]-11203[360:24]",
+          "!doc": "Validates object with schema.\n@param  {Object} object\n@param  {Object} schema\n@return {Object}        validation result with 2 properties: `valid` (`bool`) and\n                        `errors` (`TypePredicate[]`)\n@see TypePredicate\n@tutorial object-schema"
+        },
+        "!span": "0[0:0]-11373[364:0]",
+        "Number": "!modules.app/lib/objects-chema`js.String",
+        "Boolean": "!modules.app/lib/objects-chema`js.String",
+        "Function": "!modules.app/lib/objects-chema`js.String"
+      }
+    },
+    "!modules.app/lib/objects-chema`js.and.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    },
+    "!modules.app/lib/objects-chema`js.required.!ret": {
+      "!type": "fn(object: ?, prop: ?) -> [+!modules.app/lib/objects-chema`js.ValidationError]",
+      "!span": "1793[64:11]-2086[69:64]"
+    },
+    "!modules.app/lib/objects-chema`js.required.!ret.!ret": "[+!modules.app/lib/objects-chema`js.ValidationError]",
+    "!modules.app/lib/objects-chema`js.required.!ret.!ret.<i>": "+!modules.app/lib/objects-chema`js.ValidationError",
+    "!modules.app/lib/objects-chema`js.optional.!ret": {
+      "!type": "fn(object: ?, prop: ?) -> [?]",
+      "!span": "2408[83:11]-2501[83:104]"
+    },
+    "!modules.app/lib/objects-chema`js.optional.!ret.!ret": "[?]",
+    "!modules.app/lib/objects-chema`js.conditional.!ret": {
+      "!type": "fn(object: ?, prop: ?) -> [string]",
+      "!span": "2996[101:11]-3281[106:10]"
+    },
+    "!modules.app/lib/objects-chema`js.conditional.!ret.!ret": "[string]",
+    "!modules.app/lib/objects-chema`js.checkValue.!0": {
+      "!type": "fn(value: ?, prop: ?) -> [+!modules.app/lib/objects-chema`js.ValidationError]",
+      "!span": "10737[346:37]-10887[348:65]"
+    },
+    "!modules.app/lib/objects-chema`js.checkValue.!0.!ret": "[+!modules.app/lib/objects-chema`js.ValidationError]",
+    "!modules.app/lib/objects-chema`js.Any.!ret": "[?]",
+    "!modules.app/lib/objects-chema`js.regexp.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    },
+    "!modules.app/lib/objects-chema`js.Object.!0": {
+      "<i>": "?"
+    },
+    "!modules.app/lib/objects-chema`js.NotEmptyArray.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    },
+    "!modules.app/lib/objects-chema`js.min.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    },
+    "!modules.app/lib/objects-chema`js.max.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    },
+    "!modules.app/lib/objects-chema`js.minLength.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    },
+    "!modules.app/lib/objects-chema`js.maxLength.!ret": {
+      "!type": "fn(object: ?, prop: ?)",
+      "!span": "1357[49:11]-1483[50:108]"
+    }
+  }
+}
