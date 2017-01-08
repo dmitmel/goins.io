@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/png" href="/favicon.png"/>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        {% if useCDN %}
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+            <link
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+                crossorigin="anonymous">
+            <script
+                src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+                integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+                crossorigin="anonymous"></script>
+        {% else %}
+            <link rel="stylesheet" href="/css/Montserrat.css">
+            <link rel="stylesheet" href="/css/font-awesome.css">
+            <script src="/js/jquery.min.js"></script>
+        {% endif %}
+        <link rel="stylesheet" href="/css/layout.css">
+
+        <script src="/js/bootstrap.min.js"></script>
+
+        <title>
+            {% block title %}goins.io{% endblock %}
+        </title>
+
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <span><img alt="Logo" src="/images/logo.png"></span>
+                        <span id="site-title">goins.io</span>
+                    </a>
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-th-list" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav">
+                        {% if loggedIn %}
+                            <li>
+                                <a href="/">{{ i18n.layout.navbar.mainPage }}</a>
+                            </li>
+                            <li>
+                                <a href="/account">{{ i18n.layout.navbar.account }}</a>
+                            </li>
+                            <li>
+                                <a href="/shop">{{ i18n.layout.navbar.shop }}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="http://goiteens.goit.ua/">GoITeens</a>
+                            </li>
+                        {% endif %}
+                        <li class="{% if language == 'ru-RU' %}active{% endif %}">
+                            <a href="?lang=ru-RU" hreflang="ru-RU" id="navbar-lang-ru">RU</a>
+                        </li>
+                        <li class="{% if language == 'uk-UA' %}active{% endif %}">
+                            <a href="?lang=uk-UA" hreflang="uk-UA" id="navbar-lang-ua">UA</a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if loggedIn %}
+                            <li>
+                                <a class="btn btn-default navbar-btn" id="log-out" href="/log-out" role="button">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    {{ i18n.layout.navbar.logOut }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a class="btn btn-default navbar-btn" id="log-in" href="/log-in" role="button">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    {{ i18n.layout.navbar.logIn }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary navbar-btn" id="sign-up" href="/sign-up" role="button">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    {{ i18n.layout.navbar.signUp }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="footer" role="contentinfo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            {{ i18n.layout.footer.idea }}
+                            -
+                            <a href="http://goiteens.goit.ua/">GoITeens</a>
+                        </p>
+                        <p>
+                            {{ i18n.layout.footer.authors.__title__ }}:<br/>
+                            FrontEnd -
+                            <a href="{{ i18n.layout.footer.authors.frontend.url }}">{{ i18n.layout.footer.authors.frontend.name }}</a><br/>
+                            BackEnd -
+                            <a href="{{ i18n.layout.footer.authors.backend.url }}">{{ i18n.layout.footer.authors.backend.name }}</a><br/>
+                        </p>
+                        <!-- /.col-sm-6 -->
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            {{ i18n.layout.footer.srcLicense }}
+                            -
+                            <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a>
+                        </p>
+                        <p>
+                            {{ i18n.layout.footer.openSourceNotice }}
+                        </p>
+                        <!-- /.col-sm-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <div class="row text-center">
+                    <ul class="list-inline" style="padding-left: 0">
+                        <li>
+                            {{ i18n.layout.footer.version }}
+                            - v{{ version }}
+                        </li>
+                        <li>·</li>
+                        <li>
+                            <a href="https://github.com/dmitmel/goins.io">GitHub</a>
+                        </li>
+                        <li>·</li>
+                        <li>
+                            <a href="https://dmitmel.github.com/goins.io">{{ i18n.layout.footer.apiDocs }}</a>
+                        </li>
+                    </ul>
+                    <!-- /.row -->
+                </div>
+                <!-- container-->
+            </div>
+            <!-- footer -->
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                var navbar = $('.navbar');
+                var _window = $(window);
+                _window.scroll(function () {
+                    navbar.toggleClass("navbar-shadow", _window.scrollTop() > 0);
+                });
+
+                var footer = $('.footer');
+                var footerHeight = footer.outerHeight();
+                footer.css('height', footerHeight);
+                $('body > .container').css('margin-bottom', footerHeight);
+                console.log($('body > .container').css('margin-bottom'));
+            })
+        </script>
+    </body>
+
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    {% block afterBody %}{% endblock %}
+</html>

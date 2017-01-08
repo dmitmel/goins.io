@@ -1,2 +1,4 @@
 node_modules
-
+views/not-logged-in.njk
+dist
+jsdoc

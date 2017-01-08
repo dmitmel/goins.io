@@ -11,7 +11,7 @@ import logger from 'morgan';
 import methodOverride from 'method-override';
 // import { getLocalIP } from './lib/http';
 import { statusCodes } from './lib/http';
-import { inspect } from 'util';
+import requestLanguage from 'express-request-language';
 
 const port = 8080;
 const host = 'localhost';
@@ -28,30 +28,37 @@ app.use(methodOverride());
 app.use(cookieParser({
     path: '/'
 }));
+app.use(requestLanguage({
+    languages: ['ru-RU', 'uk-UA']
+}));
 
-templates.initTemplateEngine();
 loadUsers();
 
 const controllersDir = path.join(__dirname, 'controllers');
-_(_(readdirRecursiveSync(controllersDir)).filter(file => path.extname(file) === 'js')).each(file => {
+_.each(_.filter(readdirRecursiveSync(controllersDir), file => path.extname(file) === '.js'), file => {
     const controllerName = path.basename(file, path.extname(file));
     const controller = require(file); // eslint-disable-line global-require
 
     const method = controller.method.toLowerCase() || 'all';
-    const path_ = controller.path || throwWithMessage(
+    const _path = controller.path || throwWithMessage(
         `index.js: No path provided for controller '${controllerName}'. ` +
         'Please, use field \'path\'.');
     const handler = controller.handler || throwWithMessage(
         `index.js: No handler provided for controller '${controllerName}'. ` +
         'Please, use field \'handler\'.');
-    app[method](path_, handler);
+
+    app[method](_path, handler);
 });
 
 
 app.use((req, res) => {
     res.status(statusCodes.NOT_FOUND);
-    res.send(templates.renderNunjucks('errors/404.nunjucks', {
-        url: req.path
+    const language = templates.getLanguage(req);
+    res.cookie('lang', language);
+    res.send(templates.renderNunjucks('errors/404.njk', {
+        url: req.path,
+        language,
+        i18n: templates.i18ns[language]
     }));
 });
 

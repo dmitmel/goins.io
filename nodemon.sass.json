@@ -1,0 +1,5 @@
+{
+    "watch": "assets/sass",
+    "ext": "sass",
+    "exec": "npm run compile-sass"
+}

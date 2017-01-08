@@ -1,5 +1,42 @@
-{% include "layout.nunjucks" %}
+{% extends "layout.njk" %}
 
-{% block title %}{% endblock %}
+{% block title %}
+    goins.io -
+    {{ url }}
+    -
+    {{ i18n.error404.pageNotFound }}
+{% endblock %}
 
-{% block body %}{% endblock %}
+{% block content %}
+    <h1>
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Error 404:
+        {{ i18n.error404.pageNotFound }}
+    </h1>
+    <h4>{{ url }}</h4>
+    <p>
+        {{ i18n.error404.shortText }}
+    </p>
+    <img class="center-block img-responsive" style="padding: 50px 0" src="/images/Trollface.svg" alt="Trololo!">
+    <p>
+        <p>
+            {{ i18n.error404.longText[0] }}
+            <a href="/">{{ i18n.error404.longText[1] }}</a>.
+            {{ i18n.error404.longText[2] }}
+        </p>
+        <blockquote>
+            <p>{{ i18n.error404.longText[3] }}</p>
+            <footer>
+                {% if language == 'ru-RU' %}
+                    {% set wikipediaRefLang = 'ru.' %}
+                {% elif language == 'uk-UA' %}
+                    {% set wikipediaRefLang = 'uk.' %}
+                {% endif %}
+                <a href="https://{{ wikipediaRefLang }}wikipedia.org/wiki/HTTP_404">{{ i18n.error404.longText[4] }}</a>
+            </footer>
+        </blockquote>
+        <p>{{ i18n.error404.longText[5] }}</p>
+        <p>P. S.
+            {{ i18n.error404.longText[6] }}</p>
+    </p>
+{% endblock %}

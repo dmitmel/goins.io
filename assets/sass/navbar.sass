@@ -1,0 +1,96 @@
+$navbar-height: 64px
+$navbar-padding: 15px
+
+$navbar-item-height: 42px
+$navbar-item-padding: ($navbar-height - $navbar-item-height) / 2
+
+$navbar-brand-height: 50px
+$navbar-brand-padding: ($navbar-height - $navbar-brand-height) / 2
+
+$navbar-brand-margin-right: 15px
+$navbar-site-title-margin: 10px
+
+$navbar-lang-margin: 2px
+
+body
+  padding-top: $navbar-height
+
+.navbar
+  padding: 0 $navbar-padding
+
+  &.navbar-shadow
+    box-shadow: 0px 5px 13px 0px rgba(50, 50, 50, 0.9)
+
+  #navbar-lang-ru::after
+    content: "/"
+    font-weight: normal
+    color: #333
+    margin: 0 ($navbar-lang-margin / 2)
+
+  &.navbar-default .nav > li
+    font-family: "Montserrat", sans-serif
+    font-weight: bold
+
+    & > a
+      color: #9A9A9A
+
+    .navbar-btn
+      padding: 5px 10px
+
+      &.btn-default
+        color: #333
+
+        &:hover
+          background-color: #e6e6e6
+          border-color: #adadad
+
+      &.btn-primary
+        color: #FFF
+
+        &:hover
+          color: #FFF
+          background-color: #286090
+          border-color: #204D74
+
+      &#log-in
+        @media (min-width: 768px)
+          margin-right: 10px
+
+      &#sign-up,
+      &#log-out
+        @media (min-width: 768px)
+          margin-right: $navbar-padding + 7px
+
+    @media (min-width: 768px)
+      #navbar-lang-ru
+        padding-right: 0
+
+      #navbar-lang-ua
+        padding-left: 0
+
+    &.active a,
+    a:hover
+      color: #F6B137
+      background: transparent
+
+  .navbar-brand
+    padding: $navbar-brand-padding
+
+    @media (min-width: 768px)
+      margin-right: $navbar-brand-margin-right
+
+    #site-title
+      font-family: "Montserrat", sans-serif
+      font-size: 30px
+      vertical-align: middle
+      margin: 0 $navbar-site-title-margin
+      color: #333
+
+  button.navbar-toggle
+    height: $navbar-height
+    margin: 0px
+    padding: $navbar-item-padding
+    margin-right: 5px
+    font-size: 30px
+    border-color: transparent
+    background-color: transparent !important

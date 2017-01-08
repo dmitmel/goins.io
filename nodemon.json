@@ -1,8 +1,10 @@
 {
-    "watch": ["src", "views"],
-    "ext": "js,nunjucks",
-    "exec": "npm start",
+    "watch": ["src", "views", "i18n"],
+    "ext": "js,nunjucks,json",
+    "exec": "npm run build && terminal-notifier -title 'goins.io' -subtitle 'nodemon' -message 'Server is running.' -execute 'open -a /Applications/Chrome.app' -appIcon nodemon-icon.png && node dist/index.js",
     "events": {
-        "restart": "terminal-notifier -title 'goins.io' -subtitle 'nodemon' -message 'goins.io server was restarted.' -exec '/Applications/iTerm.app' -appIcon nodemon-icon.png"
+        "restart": "terminal-notifier -title 'goins.io' -subtitle 'nodemon' -message 'Server is restarting.' -appIcon nodemon-icon.png",
+        "crash": "terminal-notifier -title 'goins.io' -subtitle 'nodemon' -message 'Server has been crashed.' -execute 'open -a /Applications/iTerm.app' -appIcon nodemon-icon.png",
+        "stop": "terminal-notifier -title 'goins.io' -subtitle 'nodemon' -message 'Server has been successfully stopped.' -appIcon nodemon-icon.png"
     }
 }

@@ -6,8 +6,33 @@ import _ from 'underscore';
  * @param {string} dir
  * @return {string[]}
  */
-const readdirRecursiveSync = exports.readdirRecursiveSync = (dir) =>
-    _.flatten(_.map(fs.readdirSync(dir), fileName => {
+export function readdirRecursiveSync(dir) {
+    return _.flatten(_.map(fs.readdirSync(dir), fileName => {
         const fullPath = path.join(dir, fileName);
         return fs.statSync(fullPath).isDirectory() ? readdirRecursiveSync(fullPath) : [fullPath];
     }));
+}
+
+/**
+ * @param {string} dir
+ * @return {string[]}
+ */
+export function readdirSync(dir) {
+    return _.map(fs.readdirSync(dir), fileName => `${dir}/${fileName}`);
+}
+
+/**
+ * @param {string} _path
+ * @return {bool}
+ */
+export function isDirectory(_path) {
+    return fs.statSync(_path).isDirectory();
+}
+
+/**
+ * @param {string} _path
+ * @return {bool}
+ */
+export function isFile(_path) {
+    return fs.statSync(_path).isFile();
+}

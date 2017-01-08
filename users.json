@@ -1,0 +1,62 @@
+{
+    "1": {
+        "name": "Дмитрий",
+        "surname": "Мелешко",
+        "email": "dmytro.meleshko@gmail.com",
+        "password": "0000",
+        "type": "student",
+        "group": 1,
+        "goins": 9999,
+        "purchases": [
+            "123",
+            "456"
+        ],
+        "purchasesLog": [
+            {
+                "id": "123",
+                "date": "2016-12-30T07:21:06.264Z"
+            },
+            {
+                "id": "456",
+                "date": "2016-12-30T07:21:34.436Z"
+            }
+        ],
+        "rewardsLog": [
+            {
+                "from": "2",
+                "goins": 9999,
+                "why": "За работу на уроке"
+            }
+        ],
+        "punishmentsLog": [
+            {
+                "from": "2",
+                "goins": -9999,
+                "why": "За работу на уроке"
+            }
+        ]
+    },
+    "2": {
+        "name": "Ярослав",
+        "surname": "Выговский",
+        "email": "<я хз>",
+        "password": "<я тоже хз>",
+        "type": "teacher",
+        "lesson": "hardskills",
+        "group": 1,
+        "rewardsLog": [
+            {
+                "to": "1",
+                "goins": 9999,
+                "why": "За работу на уроке"
+            }
+        ],
+        "punishmentsLog": [
+            {
+                "to": "1",
+                "goins": -9999,
+                "why": "За работу на уроке"
+            }
+        ]
+    }
+}
